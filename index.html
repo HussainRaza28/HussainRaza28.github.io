@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hussain Raza</title>
+<meta name="description" content="Hussain Raza, computer science student at the University of Virginia and former AWS Software Development Engineer Intern.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --muted: #5f6368;
+    --line: #e6e6e6;
+    --card: #fafafa;
+    --accent: #1f5fbf;
+    --tag-bg: #eef3fb;
+    --tag-text: #1f4f99;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111315;
+      --text: #ececec;
+      --muted: #a0a4a8;
+      --line: #2a2d31;
+      --card: #171a1d;
+      --accent: #7aa7ff;
+      --tag-bg: #1d2633;
+      --tag-text: #a9c4ff;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  nav .name { font-weight: 600; color: var(--text); }
+  nav ul { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0; }
+  nav ul a { color: var(--muted); font-size: 15px; }
+  nav ul a:hover { color: var(--text); text-decoration: none; }
+
+  header.hero { padding: 72px 0 40px; }
+  .hero h1 { font-size: 40px; line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.02em; }
+  .hero .sub { font-size: 18px; color: var(--muted); margin: 0 0 24px; }
+  .hero p.about { margin: 0 0 28px; max-width: 640px; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    display: inline-block; padding: 8px 16px; border-radius: 8px;
+    border: 1px solid var(--line); color: var(--text); font-size: 15px;
+  }
+  .btn:hover { border-color: var(--accent); text-decoration: none; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  @media (prefers-color-scheme: dark) { .btn.primary { color: #0b0d10; } }
+
+  section { padding: 40px 0; border-top: 1px solid var(--line); }
+  section h2 {
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); margin: 0 0 24px; font-weight: 600;
+  }
+
+  .item { margin-bottom: 32px; }
+  .item:last-child { margin-bottom: 0; }
+  .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .item h3 { font-size: 18px; margin: 0; }
+  .when { color: var(--muted); font-size: 14px; white-space: nowrap; }
+  .role { color: var(--muted); margin: 2px 0 10px; font-size: 15px; }
+  ul.points { margin: 0; padding-left: 20px; }
+  ul.points li { margin-bottom: 6px; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px; margin-bottom: 16px;
+  }
+  .card:last-child { margin-bottom: 0; }
+  .card p { margin: 8px 0 12px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+  .tags li {
+    background: var(--tag-bg); color: var(--tag-text);
+    font-size: 13px; padding: 3px 10px; border-radius: 999px;
+  }
+  .card .more { font-size: 15px; display: inline-block; margin-top: 12px; }
+
+  .skills { display: grid; grid-template-columns: 140px 1fr; gap: 10px 20px; margin: 0; }
+  .skills dt { color: var(--muted); font-size: 15px; }
+  .skills dd { margin: 0; }
+
+  .contact p { margin: 0 0 16px; }
+  footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 600px) {
+    nav ul { gap: 14px; }
+    nav ul li.hide-sm { display: none; }
+    header.hero { padding: 48px 0 32px; }
+    .hero h1 { font-size: 32px; }
+    .skills { grid-template-columns: 1fr; gap: 2px; }
+    .skills dd { margin-bottom: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="name" href="#top">Hussain Raza</a>
+    <ul>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li class="hide-sm"><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
+
+  <header class="hero">
+    <h1>Hussain Raza</h1>
+    <p class="sub">Computer Science at the University of Virginia · Former AWS SDE Intern</p>
+    <p class="about">
+      I'm a third-year CS student at UVA, graduating in May 2028. In summer 2025 I interned on the
+      CloudWatch Agent team at AWS, where I worked on health monitoring for Kubernetes and got three
+      pull requests merged into public AWS repositories. I like building software that people actually
+      use, and a lot of my work lately involves AI coding tools like Claude Code and Kiro.
+    </p>
+    <div class="links">
+      <a class="btn primary" href="Hussain_Raza_Resume_GitHub.pdf" target="_blank" rel="noopener">Resume</a>
+      <a class="btn" href="https://github.com/HussainRaza28" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/hussain-raza-16b696281" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="mailto:mhraza2806@gmail.com">Email</a>
+    </div>
+  </header>
+
+  <section id="experience">
+    <h2>Experience</h2>
+
+    <div class="item">
+      <div class="item-head">
+        <h3>Amazon Web Services (AWS)</h3>
+        <span class="when">May 2025 – Aug 2025</span>
+      </div>
+      <p class="role">Software Development Engineer Intern, CloudWatch Agent Team · Arlington, VA</p>
+      <ul class="points">
+        <li>Made failures visible for 3 agent and GPU monitoring components by emitting health events and status conditions through the Kubernetes API</li>
+        <li>Enabled Kubernetes to automatically detect and restart failing pods across 4 CloudWatch Agent Operator components by implementing liveness and readiness probes in Go</li>
+        <li>Merged 3 pull requests (about 700 lines of Go, including unit tests) into 2 public AWS open-source repositories after code review</li>
+        <li>Used Kiro, AWS's AI coding IDE, to map an unfamiliar Go codebase and draft changes, then reviewed and tested all AI-generated code before review</li>
+      </ul>
+      <p class="role" style="margin-top:12px">
+        Pull requests:
+        <a href="https://github.com/aws/amazon-cloudwatch-agent-operator/pull/327" target="_blank" rel="noopener">Liveness &amp; readiness probes</a> ·
+        <a href="https://github.com/aws/amazon-cloudwatch-agent-operator/pull/332" target="_blank" rel="noopener">Status conditions &amp; health events</a> ·
+        <a href="https://github.com/aws/amazon-cloudwatch-agent/pull/1779" target="_blank" rel="noopener">Health check extension</a>
+      </p>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <h3>MIT Introduction to Technology, Engineering, and Science (MITES)</h3>
+        <span class="when">Jun 2023 – Jan 2024</span>
+      </div>
+      <p class="role">Student · Virtual</p>
+      <ul class="points">
+        <li>Selected as 1 of ~230 students from ~2,700 applicants for MIT's 6-month STEM program</li>
+        <li>Used ArcGIS Online to analyze relationships between socioeconomic factors and healthcare access</li>
+        <li>Presented geographic visualizations and findings at a research symposium</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <div class="card">
+      <div class="item-head">
+        <h3>CIO Manager</h3>
+        <span class="when">Spring 2026</span>
+      </div>
+      <p>
+        A Django web app that helps UVA student organizations message their members and track attendance,
+        built by a 5-person Agile team. I built the messaging system, including direct messages with file
+        attachments and group chats for each team. As QA lead, I ran beta testing with 11 outside users
+        across 3 user roles and tracked what they found in GitHub issues.
+      </p>
+      <ul class="tags"><li>Python</li><li>Django</li><li>PostgreSQL</li><li>AWS S3</li><li>GitHub Actions</li></ul>
+      <a class="more" href="https://github.com/HussainRaza28/uva-cio-platform" target="_blank" rel="noopener">View on GitHub →</a>
+    </div>
+
+    <div class="card">
+      <div class="item-head">
+        <h3>College Tuition Analysis App</h3>
+        <span class="when">Spring 2026</span>
+      </div>
+      <p>
+        An R Shiny app that tests whether private colleges cost significantly more than public ones,
+        using U.S. College Scorecard data on about 7,800 schools. I built the hypothesis testing and
+        confidence interval features, including two-sample t-tests with an adjustable significance level.
+      </p>
+      <ul class="tags"><li>R</li><li>Shiny</li><li>Statistics</li></ul>
+      <a class="more" href="https://github.com/HussainRaza28/uva-shiny-app" target="_blank" rel="noopener">View on GitHub →</a>
+    </div>
+
+    <div class="card">
+      <div class="item-head">
+        <h3>Missile Booster Optimization Simulator</h3>
+        <span class="when">Spring 2025</span>
+      </div>
+      <p>
+        A Python simulator built for a U.S. Navy client that compares 3-stage and pop-out booster designs
+        by delta-V and range. It reached under 2% simulation error across 24 validated test cases, and a
+        Tkinter GUI with matplotlib charts lets users compare designs without writing code.
+      </p>
+      <ul class="tags"><li>Python</li><li>Tkinter</li><li>matplotlib</li></ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Languages</dt><dd>Python, Java, Go, C, R</dd>
+      <dt>Cloud &amp; DevOps</dt><dd>AWS, CloudWatch, Kubernetes, Docker, Git, GitHub Actions, Linux</dd>
+      <dt>Data &amp; Web</dt><dd>Django, pandas, NumPy, matplotlib, R Shiny, ArcGIS</dd>
+      <dt>AI Tools</dt><dd>Claude Code, Codex, Kiro, AWS Bedrock</dd>
+    </dl>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>I'm looking for software engineering internships for summer 2027. The best way to reach me is by email.</p>
+    <div class="links">
+      <a class="btn primary" href="mailto:mhraza2806@gmail.com">mhraza2806@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/hussain-raza-16b696281" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/HussainRaza28" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Hussain Raza</div>
+</footer>
+
+</body>
+</html>
