@@ -94,6 +94,47 @@
   }
   .card .more { font-size: 15px; display: inline-block; margin-top: 12px; }
 
+  .storymap-preview {
+    margin-top: 20px; overflow: hidden;
+    border: 1px solid var(--line); border-radius: 14px;
+    background: var(--card);
+  }
+  .storymap-preview-header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 16px 18px; border-bottom: 1px solid var(--line);
+  }
+  .storymap-preview-heading { min-width: 0; }
+  .storymap-preview-label {
+    display: block; color: var(--muted); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; line-height: 1.4; text-transform: uppercase;
+  }
+  .storymap-preview-title {
+    display: block; margin-top: 3px; font-size: 16px; font-weight: 600;
+  }
+  .storymap-preview-open { flex-shrink: 0; font-size: 14px; }
+  .hero-eye-tracker {
+    display: grid; width: 52px; height: 52px; align-self: center;
+    place-items: center; flex: 0 0 52px;
+  }
+  .hero-eye-ball {
+    display: block; width: 100%; height: 100%; overflow: visible;
+    filter: drop-shadow(0 2px 3px rgb(26 26 26 / 14%));
+  }
+  .hero-eye-body {
+    fill: var(--card); stroke: var(--muted); stroke-opacity: 0.35; stroke-width: 2;
+  }
+  .hero-eye {
+    fill: var(--text);
+  }
+  .storymap-frame {
+    display: block; width: 100%; height: 500px;
+    border: 0; background: var(--bg);
+  }
+  @media (max-width: 600px) {
+    .storymap-preview-header { align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+    .storymap-preview-open { margin-left: 0; }
+    .storymap-frame { height: 420px; }
+  }
   .skills { display: grid; grid-template-columns: 140px 1fr; gap: 10px 20px; margin: 0; }
   .skills dt { color: var(--muted); font-size: 15px; }
   .skills dd { margin: 0; }
@@ -141,6 +182,15 @@
       <a class="btn" href="https://github.com/HussainRaza28" target="_blank" rel="noopener">GitHub</a>
       <a class="btn" href="https://www.linkedin.com/in/hussain-raza-16b696281" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn" href="mailto:mhraza2806@gmail.com">Email</a>
+      <div class="hero-eye-tracker" aria-hidden="true">
+        <svg class="hero-eye-ball" viewBox="0 0 100 100">
+          <path class="hero-eye-body" d="M30 6 H70 A24 24 0 0 1 94 30 V70 A24 24 0 0 1 70 94 H30 A24 24 0 0 1 6 70 V30 A24 24 0 0 1 30 6 Z"/>
+          <g class="hero-eye-pair">
+            <g class="hero-eye-left"><rect class="hero-eye" x="-4.5" y="-7.5" width="9" height="15" rx="4.5"/></g>
+            <g class="hero-eye-right"><rect class="hero-eye" x="-4.5" y="-7.5" width="9" height="15" rx="4.5"/></g>
+          </g>
+        </svg>
+      </div>
     </div>
   </header>
 
@@ -178,10 +228,21 @@
         <li>Used ArcGIS Online to analyze relationships between socioeconomic factors and healthcare access</li>
         <li>Presented geographic visualizations and findings at a research symposium</li>
       </ul>
-      <p class="role" style="margin-top:12px">
-        Project:
-        <a href="https://storymaps.arcgis.com/stories/aeddc204d4df4affaf2ee361efde081c" target="_blank" rel="noopener">Interactive ArcGIS StoryMap</a>
-      </p>
+      <div class="storymap-preview">
+        <div class="storymap-preview-header">
+          <div class="storymap-preview-heading">
+            <span class="storymap-preview-label">MITES research project</span>
+            <span class="storymap-preview-title">Healthcare access &amp; socioeconomic factors</span>
+          </div>
+          <a class="storymap-preview-open" href="https://storymaps.arcgis.com/stories/aeddc204d4df4affaf2ee361efde081c" target="_blank" rel="noopener">Open full story ↗</a>
+        </div>
+        <iframe
+          class="storymap-frame"
+          src="https://storymaps.arcgis.com/stories/aeddc204d4df4affaf2ee361efde081c"
+          title="MITES StoryMap: healthcare access and socioeconomic factors"
+          allowfullscreen
+          allow="geolocation"></iframe>
+      </div>
     </div>
   </section>
 
@@ -256,6 +317,127 @@
 <footer>
   <div class="wrap">© 2026 Hussain Raza</div>
 </footer>
+
+<script>
+  const eyeTracker = document.querySelector(".hero-eye-tracker");
+  const eyes = [
+    eyeTracker.querySelector(".hero-eye-left"),
+    eyeTracker.querySelector(".hero-eye-right")
+  ];
+  const eyeRects = eyes.map((eye) => eye.firstElementChild);
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  const turn = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 };
+  const radius = 50;
+  const gap = 0.19;
+  let animationFrame = 0;
+  let lastFrame = 0;
+  let blinkStart = 0;
+  let nextBlink = performance.now() + 2200;
+  let visible = true;
+
+  /* The eyes are points on the ball's surface, not stickers on top:
+     the far eye narrows as the ball turns away from the pointer. */
+  const drawEyes = (now) => {
+    if (now > nextBlink) {
+      blinkStart = now;
+      nextBlink = now + 2600 + Math.random() * 3200;
+    }
+
+    const blinkProgress = (now - blinkStart) / 160;
+    const lid = blinkProgress >= 0 && blinkProgress < 1
+      ? 1 - 0.9 * Math.sin(blinkProgress * Math.PI)
+      : 1;
+    const yaw = Math.asin(clamp(turn.x, -0.92, 0.92));
+    const pitch = -Math.asin(clamp(turn.y, -0.92, 0.92));
+    const cosYaw = Math.cos(yaw);
+    const sinYaw = Math.sin(yaw);
+    const cosPitch = Math.cos(pitch);
+    const sinPitch = Math.sin(pitch);
+    const tilt = 64 * turn.x * turn.y;
+
+    [-gap, gap].forEach((x0, index) => {
+      const z0 = Math.sqrt(1 - x0 * x0);
+      const x1 = x0 * cosYaw + z0 * sinYaw;
+      const z1 = -x0 * sinYaw + z0 * cosYaw;
+      const y2 = -z1 * sinPitch;
+      const z2 = z1 * cosPitch;
+      const near = clamp(z2, 0, 1);
+      const scale = 0.45 + 0.55 * near;
+      const widthScale = scale * (0.7 + 0.3 * near);
+      const width = 9 * widthScale;
+      const height = Math.max(0.6, 15 * scale * lid);
+      const rect = eyeRects[index];
+
+      rect.setAttribute("x", (-width / 2).toFixed(2));
+      rect.setAttribute("y", (-height / 2).toFixed(2));
+      rect.setAttribute("width", width.toFixed(2));
+      rect.setAttribute("height", height.toFixed(2));
+      rect.setAttribute("rx", Math.min(4.5, width / 2, height / 2).toFixed(2));
+      eyes[index].setAttribute(
+        "transform",
+        `translate(${(50 + x1 * radius).toFixed(2)} ${(50 + y2 * radius).toFixed(2)}) rotate(${tilt.toFixed(2)})`
+      );
+      eyes[index].style.opacity = z2 < 0.05 ? "0" : "1";
+    });
+  };
+
+  const animate = (now) => {
+    if (!visible || document.hidden) {
+      animationFrame = 0;
+      lastFrame = 0;
+      return;
+    }
+
+    const delta = lastFrame ? Math.min(2.5, (now - lastFrame) / 16.67) : 1;
+    lastFrame = now;
+    if (reducedMotion) {
+      turn.x = turn.tx;
+      turn.y = turn.ty;
+    } else {
+      const damping = 0.34 - 0.22 * 0.3;
+      turn.vx += ((turn.tx - turn.x) * 0.06 - turn.vx * damping) * delta;
+      turn.vy += ((turn.ty - turn.y) * 0.06 - turn.vy * damping) * delta;
+      turn.x += turn.vx * delta;
+      turn.y += turn.vy * delta;
+    }
+
+    drawEyes(now);
+    animationFrame = requestAnimationFrame(animate);
+  };
+
+  const resumeAnimation = () => {
+    if (!animationFrame && visible && !document.hidden) {
+      animationFrame = requestAnimationFrame(animate);
+    }
+  };
+
+  /* Aim against the whole viewport so the eyes follow the pointer
+     anywhere on the page, then spring back when it leaves. */
+  window.addEventListener("pointermove", (event) => {
+    const bounds = eyeTracker.getBoundingClientRect();
+    const dx = event.clientX - (bounds.left + bounds.width / 2);
+    const dy = event.clientY - (bounds.top + bounds.height / 2);
+    const distance = Math.hypot(dx, dy) || 1;
+    const reach = Math.max(60, Math.min(window.innerWidth, window.innerHeight) * 0.28);
+    const amount = Math.min(0.85, Math.tanh(distance / reach) * 0.9);
+    turn.tx = (dx / distance) * amount;
+    turn.ty = (dy / distance) * amount;
+  }, { passive: true });
+
+  document.documentElement.addEventListener("pointerleave", () => {
+    turn.tx = 0;
+    turn.ty = 0;
+  });
+
+  const observer = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    resumeAnimation();
+  });
+  observer.observe(eyeTracker);
+  document.addEventListener("visibilitychange", resumeAnimation);
+  animationFrame = requestAnimationFrame(animate);
+</script>
 
 </body>
 </html>
