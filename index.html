@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hussain Raza</title>
-<meta name="description" content="Hussain Raza, computer science student at the University of Virginia and former AWS Software Development Engineer Intern.">
+<meta name="description" content="Hussain Raza, University of Virginia computer science student, former AWS Software Development Engineer Intern, and Skypane developer.">
 <style>
   :root {
     --bg: #ffffff;
@@ -57,10 +57,12 @@
   .hero h1 { font-size: 40px; line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.02em; }
   .hero .sub { font-size: 18px; color: var(--muted); margin: 0 0 24px; }
   .hero p.about { margin: 0 0 28px; max-width: 640px; }
-  .links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
   .btn {
-    display: inline-block; padding: 8px 16px; border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 8px 16px; border-radius: 8px;
     border: 1px solid var(--line); color: var(--text); font-size: 15px;
+    line-height: 1.5; text-align: center;
   }
   .btn:hover { border-color: var(--accent); text-decoration: none; }
   .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
@@ -158,6 +160,7 @@
   <div class="wrap">
     <a class="name" href="#top">Hussain Raza</a>
     <ul>
+      <li><a href="#education">Education</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li class="hide-sm"><a href="#skills">Skills</a></li>
@@ -193,6 +196,20 @@
       </div>
     </div>
   </header>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="item">
+      <div class="item-head">
+        <h3>University of Virginia</h3>
+        <span class="when">Expected May 2028</span>
+      </div>
+      <p class="role">B.S. in Computer Science, AI Concentration · Minor in Data Science · Charlottesville, VA</p>
+      <p>Relevant coursework: Data Structures &amp; Algorithms I &amp; II, Computer Systems &amp; Organization I &amp; II,
+        Mobile Application Development, Software Engineering, Cybersecurity, Discrete Mathematics, and Data Science.</p>
+      <p class="role">Honors: APIA Scholar, Amazon Future Engineer Scholar, QuestBridge National College Match Finalist</p>
+    </div>
+  </section>
 
   <section id="experience">
     <h2>Experience</h2>
@@ -255,12 +272,12 @@
         <span class="when">Fall 2026</span>
       </div>
       <p>
-        A native macOS menu bar app that puts the weather outside onto your desktop. Snow falls behind your
-        windows, piles up on top of them, and slides off when you move them. It pulls live local weather from
-        Open-Meteo, and you can describe your own scene, which Apple Intelligence designs on your Mac.
-        Released as a free download on GitHub.
+        A native macOS weather app with live conditions and window-aware particle animations. Apple Foundation
+        Models create custom scenes from natural-language prompts, with validation that keeps generated effects
+        within the request. Rendering optimizations reduced thunderstorm CPU use from 35% to 18% and idle memory
+        use by 45%; rendering suspends when inactive.
       </p>
-      <ul class="tags"><li>Swift</li><li>SwiftUI</li><li>AppKit</li><li>SpriteKit</li><li>Foundation Models</li></ul>
+      <ul class="tags"><li>Swift</li><li>SwiftUI</li><li>SpriteKit</li><li>Apple Foundation Models</li></ul>
       <a class="more" href="https://github.com/HussainRaza28/Skypane" target="_blank" rel="noopener">View on GitHub →</a>
     </div>
 
@@ -272,8 +289,10 @@
       <p>
         A Django web app that helps UVA student organizations message their members and track attendance,
         built by a 5-person Agile team. I built the messaging system, including direct messages with file
-        attachments and group chats for each team. As QA lead, I ran beta testing with 11 outside users
-        across 3 user roles and tracked what they found in GitHub issues.
+        attachments and per-team group chats using data models, views, and a JavaScript UI that sends messages
+        without page reloads. As QA lead, I triaged findings from 11 external beta testers across 3 roles into
+        GitHub issues, fixed tester-reported bugs and a Google sign-in bug that overwrote profiles, and resolved
+        a failing CI build.
       </p>
       <ul class="tags"><li>Python</li><li>Django</li><li>PostgreSQL</li><li>AWS S3</li><li>GitHub Actions</li></ul>
       <a class="more" href="https://github.com/HussainRaza28/uva-cio-platform" target="_blank" rel="noopener">View on GitHub →</a>
@@ -310,18 +329,20 @@
   <section id="skills">
     <h2>Skills</h2>
     <dl class="skills">
-      <dt>Languages</dt><dd>Python, Java, Go, Swift, C, R</dd>
-      <dt>Cloud &amp; DevOps</dt><dd>AWS, CloudWatch, Kubernetes, Docker, Git, GitHub Actions, Linux</dd>
-      <dt>Data &amp; Web</dt><dd>Django, pandas, NumPy, matplotlib, R Shiny, ArcGIS</dd>
-      <dt>AI Tools</dt><dd>Claude Code, Codex, Kiro, AWS Bedrock</dd>
+      <dt>Languages</dt><dd>Python, Java, Go, Swift, JavaScript, SQL, C, R</dd>
+      <dt>Frameworks</dt><dd>SwiftUI, SpriteKit, Django, R Shiny</dd>
+      <dt>Developer tools</dt><dd>AWS, CloudWatch, Bedrock, Docker, Kubernetes, Git, GitHub Actions, Linux, Xcode</dd>
+      <dt>Libraries</dt><dd>pandas, NumPy, Matplotlib</dd>
+      <dt>AI tools</dt><dd>Claude Code, Codex, Kiro, Apple Foundation Models</dd>
     </dl>
   </section>
 
   <section id="contact" class="contact">
     <h2>Contact</h2>
-    <p>I'm looking for software engineering internships for summer 2027. The best way to reach me is by email.</p>
+    <p>Feel free to reach out.</p>
     <div class="links">
       <a class="btn primary" href="mailto:mhraza2806@gmail.com">mhraza2806@gmail.com</a>
+      <a class="btn" href="tel:+17033131205">703-313-1205</a>
       <a class="btn" href="https://www.linkedin.com/in/hussain-raza-16b696281" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn" href="https://github.com/HussainRaza28" target="_blank" rel="noopener">GitHub</a>
     </div>
