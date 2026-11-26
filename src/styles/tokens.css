@@ -1,0 +1,52 @@
+/* Design tokens. All component styles read from these variables,
+   so a new visual direction only needs changes here. */
+:root {
+  /* Color */
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --muted: #5f6368;
+  --line: #e6e6e6;
+  --card: #fafafa;
+  --accent: #1f5fbf;
+  --on-accent: #ffffff;
+  --tag-bg: #eef3fb;
+  --tag-text: #1f4f99;
+  --eye-shadow: rgb(26 26 26 / 14%);
+
+  /* Type */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --text-base: 16px;
+  --leading: 1.6;
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-ui: 15px;
+  --text-lg: 18px;
+  --text-hero: 40px;
+  --text-hero-sm: 32px;
+
+  /* Layout */
+  --content-width: 760px;
+  --gutter: 20px;
+  --nav-height: 56px;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111315;
+    --text: #ececec;
+    --muted: #a0a4a8;
+    --line: #2a2d31;
+    --card: #171a1d;
+    --accent: #7aa7ff;
+    --on-accent: #0b0d10;
+    --tag-bg: #1d2633;
+    --tag-text: #a9c4ff;
+  }
+}
