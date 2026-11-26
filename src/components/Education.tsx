@@ -11,7 +11,6 @@ export default function Education() {
         </div>
         <p className="role">{education.degree}</p>
         <p>{education.coursework}</p>
-        <p className="role">{education.honors}</p>
       </div>
     </section>
   )

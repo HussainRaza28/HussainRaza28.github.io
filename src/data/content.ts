@@ -13,6 +13,7 @@ export const profile = {
 export const navLinks = [
   { href: '#education', label: 'Education' },
   { href: '#experience', label: 'Experience' },
+  { href: '#honors', label: 'Honors' },
   { href: '#projects', label: 'Projects' },
   { href: '#skills', label: 'Skills', hideSmall: true },
   { href: '#contact', label: 'Contact' },
@@ -24,7 +25,6 @@ export const education = {
   degree: 'B.S. in Computer Science, AI Concentration · Minor in Data Science · Charlottesville, VA',
   coursework:
     'Relevant coursework: Data Structures & Algorithms I & II, Computer Systems & Organization I & II, Mobile Application Development, Software Engineering, Cybersecurity, Discrete Mathematics, and Data Science.',
-  honors: 'Honors: APIA Scholar, Amazon Future Engineer Scholar, QuestBridge National College Match Finalist',
 }
 
 export type Link = { href: string; label: string }
@@ -71,6 +71,43 @@ export const experience: Job[] = [
       frameTitle: 'MITES StoryMap: healthcare access and socioeconomic factors',
     },
   },
+]
+
+/* Honors & Involvement. Add new entries to the end of either list;
+   the section renders whatever is here, in order. */
+
+export type Honor = {
+  name: string
+  /** Short qualifier shown under the name, e.g. what the award is. */
+  detail?: string
+  /** When it was awarded, e.g. "2025" or "Inducted 2026". */
+  when?: string
+}
+
+export const honors: Honor[] = [
+  // TODO: year awarded
+  { name: 'APIA Scholar' },
+  // TODO: year awarded
+  { name: 'Amazon Future Engineer Scholar' },
+  // TODO: year named finalist
+  { name: 'QuestBridge National College Match Finalist' },
+  // TODO: chapter or school, if it should be shown
+  { name: 'Tri-Alpha', detail: 'First-generation honor society', when: 'Inducted 2026' },
+]
+
+export type Involvement = {
+  org: string
+  role: string
+  since: string
+  /** Optional link to the group. */
+  href?: string
+}
+
+export const involvement: Involvement[] = [
+  // TODO: chapter (e.g. which campus) and link, if wanted
+  { org: 'Google Developer Group', role: 'Member', since: '2025' },
+  // TODO: chapter (e.g. which campus) and link, if wanted
+  { org: 'Claude Builders Club', role: 'Member', since: '2026' },
 ]
 
 export type Project = {
