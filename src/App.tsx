@@ -10,7 +10,6 @@ import Honors from './components/Honors'
 import Nav from './components/Nav'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
-import Tailor from './components/Tailor'
 
 export default function App() {
   useEffect(() => startSmoothScroll(), [])
@@ -27,8 +26,7 @@ export default function App() {
         <Honors index={3} />
         <Projects index={4} />
         <Skills index={5} />
-        <Tailor index={6} />
-        <Contact index={7} />
+        <Contact index={6} />
       </main>
       <Footer />
     </MotionConfig>

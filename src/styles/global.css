@@ -262,53 +262,6 @@ img, svg { display: block; }
   .skill-group { grid-template-columns: 160px minmax(0, 1fr); gap: var(--space-5); align-items: baseline; }
 }
 
-/* Resume tailor */
-.tailor {
-  display: flex; flex-direction: column; gap: var(--space-5);
-  padding: var(--space-5);
-  border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface);
-}
-.tailor__head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
-.tailor__title { font-size: var(--size-xl); }
-.tailor__intro { color: var(--text-muted); font-size: var(--size-sm); }
-.badge {
-  display: inline-flex; align-items: center; gap: var(--space-1);
-  padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill);
-  background: var(--accent-soft); color: var(--tag-text); font-size: var(--size-xs); font-weight: 600;
-}
-.badge svg { width: 12px; height: 12px; }
-.tailor__body { display: grid; gap: var(--space-5); }
-.field { display: flex; flex-direction: column; gap: var(--space-3); }
-.field__label { font-size: var(--size-sm); font-weight: 500; }
-.textarea {
-  width: 100%; min-height: 200px; resize: vertical;
-  padding: var(--space-4);
-  border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--bg); color: var(--text);
-  font: inherit; font-size: var(--size-sm); line-height: 1.6;
-}
-.textarea::placeholder { color: var(--text-muted); opacity: 1; }
-.textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--radius-md); }
-.field__foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-3); }
-.counter { color: var(--text-muted); font-size: var(--size-xs); font-variant-numeric: tabular-nums; }
-.counter[data-over='true'] { color: var(--accent); }
-.output { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-5); border-radius: var(--radius-md); background: var(--surface-2); }
-.output__label { color: var(--text-muted); font-size: var(--size-xs); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
-.output__lines { display: flex; flex-direction: column; gap: var(--space-2); }
-.skeleton { height: 10px; border-radius: var(--radius-pill); background: var(--line); }
-.output__bullets { display: flex; flex-direction: column; gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
-.output__bullets li { display: flex; align-items: center; gap: var(--space-2); }
-.output__bullets li::before { content: ''; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-.output__bullets--text li { align-items: baseline; font-size: var(--size-sm); }
-.output__bullets--text li::before { transform: translateY(-2px); }
-.output__summary { font-size: var(--size-sm); line-height: 1.6; }
-.output__note { color: var(--text-muted); font-size: var(--size-xs); }
-.output__error { color: var(--accent); font-size: var(--size-sm); }
-@media (min-width: 1024px) {
-  .tailor { padding: var(--space-6); }
-  .tailor__body { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .textarea { min-height: 240px; }
-}
-
 /* Contact */
 .contact__lead { font-family: var(--font-display); font-size: var(--size-2xl); font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; }
 .contact__email {

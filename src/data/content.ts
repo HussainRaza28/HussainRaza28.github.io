@@ -17,7 +17,6 @@ export const navLinks = [
   { href: '#honors', label: 'Honors' },
   { href: '#projects', label: 'Projects' },
   { href: '#skills', label: 'Skills' },
-  { href: '#tailor', label: 'Tailor' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -164,11 +163,4 @@ export const skills: [string, string][] = [
 
 export const contact = {
   lead: 'Feel free to reach out.',
-}
-
-export const tailor = {
-  title: 'Tailor my resume',
-  intro: 'Paste a job description and get a short summary and resume bullets matched to the role.',
-  placeholder: 'Paste the job description here…',
-  comingSoon: "This tool isn't live yet. Results will show up here once it launches.",
 }
