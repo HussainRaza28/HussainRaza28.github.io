@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
-import DotGrid from './DotGrid'
+import { lazy, Suspense, useEffect, useState } from 'react'
+
+const DotGrid = lazy(() => import('./DotGrid'))
 
 const readColors = () => {
   const css = getComputedStyle(document.documentElement)
@@ -26,19 +27,21 @@ export default function HeroBackground() {
 
   return (
     <div className="hero__bg" aria-hidden="true">
-      <DotGrid
-        key={colors.base}
-        dotSize={3}
-        gap={30}
-        baseColor={colors.base}
-        activeColor={colors.active}
-        proximity={110}
-        strength={0.6}
-        swell={0.5}
-        stretch={0.3}
-        glow={0.25}
-        clickShock={false}
-      />
+      <Suspense fallback={null}>
+        <DotGrid
+          key={colors.base}
+          dotSize={3}
+          gap={30}
+          baseColor={colors.base}
+          activeColor={colors.active}
+          proximity={110}
+          strength={0.6}
+          swell={0.5}
+          stretch={0.3}
+          glow={0.25}
+          clickShock={false}
+        />
+      </Suspense>
     </div>
   )
 }
