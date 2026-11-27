@@ -4,6 +4,7 @@
   same scene can be rendered at any size; scripts/render-art.mjs turns
   it into the optimized images in public/images.
 */
+// eslint-disable-next-line no-unused-vars -- called by scripts/render-art.mjs
 function paintLandscape(ctx, W, H, portrait) {
   let seed = 271828;
   const rand = () => {
