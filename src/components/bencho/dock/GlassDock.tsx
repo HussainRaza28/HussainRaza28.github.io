@@ -2,7 +2,7 @@
 
 import "./GlassDock.css";
 import "../bencho-tokens.css";
-import { useLayoutEffect, useRef, useState, type ComponentType } from "react";
+import { Fragment, useLayoutEffect, useRef, useState, type ComponentType } from "react";
 
 /* ══ dock, distance based magnification ═══════════════════
    Adapted from the bencho.dev Dock block (MIT). The items are
@@ -20,6 +20,10 @@ export type DockItem = {
   href: string;
   Icon: ComponentType<{ size?: number; strokeWidth?: number; "aria-hidden"?: boolean }>;
   external?: boolean;
+  /** Draw a divider before this item. */
+  separatorBefore?: boolean;
+  /** Hidden on narrow screens to keep the dock on one line. */
+  optional?: boolean;
 };
 
 const stillness = () =>
@@ -60,6 +64,7 @@ export function GlassDock({
     let gap = Infinity;
     els.forEach((el, i) => {
       const b = el.getBoundingClientRect();
+      if (!b.width) return;
       const d = Math.abs(clientX - (b.left + b.width / 2));
       if (d < gap) { gap = d; best = i; }
     });
@@ -79,19 +84,21 @@ export function GlassDock({
       }}
       onBlur={() => setHover(null)}
     >
-      {items.map(({ key, label: name, href, Icon, external }, i) => {
+      {items.map(({ key, label: name, href, Icon, external, separatorBefore, optional }, i) => {
         const d = hover === null ? 99 : Math.abs(i - hover);
         /* a raised cosine over the reach: 1 under the cursor,
            easing to 0 at the edge of the reach */
         const f = still || d > spread ? 0 : (1 + Math.cos((Math.PI * d) / (spread + 1))) / 2;
         const scale = 1 + (magnify - 1) * f;
         return (
+          <Fragment key={key}>
+          {separatorBefore && <span className="dock-sep" aria-hidden="true" />}
           <a
-            key={key}
             className="gdock-item"
             href={href}
             aria-label={name}
             data-near={d <= 1 ? d : undefined}
+            data-optional={optional || undefined}
             {...(external ? { target: "_blank", rel: "noopener" } : {})}
           >
             {/* the glyph magnifies, not the link, so the tip and
@@ -100,9 +107,10 @@ export function GlassDock({
               className="gdock-glyph"
               style={{ transform: `translateY(${-lift * f}px) scale(${scale})` }}
             >
-              <Icon size={20} strokeWidth={2} aria-hidden={true} />
+              <Icon size={20} strokeWidth={1.75} aria-hidden={true} />
             </span>
           </a>
+          </Fragment>
         );
       })}
       {labels && <DockTip bar={bar} at={hover} items={items} />}
