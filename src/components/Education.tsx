@@ -1,17 +1,13 @@
-import { education } from '../data/content'
+import { education } from '@/data/content'
+import Section from './Section'
+import TimelineItem from './TimelineItem'
 
-export default function Education() {
+export default function Education({ index }: { index: number }) {
   return (
-    <section id="education">
-      <h2>Education</h2>
-      <div className="item">
-        <div className="item-head">
-          <h3>{education.school}</h3>
-          <span className="when">{education.when}</span>
-        </div>
-        <p className="role">{education.degree}</p>
-        <p>{education.coursework}</p>
-      </div>
-    </section>
+    <Section id="education" index={index} title="Education">
+      <TimelineItem when={education.when} title={education.school} role={education.degree}>
+        <p className="tl-text">{education.coursework}</p>
+      </TimelineItem>
+    </Section>
   )
 }

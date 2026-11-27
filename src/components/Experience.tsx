@@ -1,36 +1,31 @@
-import { Fragment } from 'react'
-import { experience } from '../data/content'
+import { ArrowUpRight } from 'lucide-react'
+import { experience } from '@/data/content'
 import ExternalLink from './ExternalLink'
+import Section from './Section'
 import StoryMap from './StoryMap'
+import TimelineItem from './TimelineItem'
 
-export default function Experience() {
+export default function Experience({ index }: { index: number }) {
   return (
-    <section id="experience">
-      <h2>Experience</h2>
+    <Section id="experience" index={index} title="Experience">
       {experience.map((job) => (
-        <div className="item" key={job.company}>
-          <div className="item-head">
-            <h3>{job.company}</h3>
-            <span className="when">{job.when}</span>
-          </div>
-          <p className="role">{job.role}</p>
+        <TimelineItem key={job.company} when={job.when} title={job.company} role={job.role}>
           <ul className="points">
             {job.points.map((point) => <li key={point}>{point}</li>)}
           </ul>
           {job.pulls && (
-            <p className="role pulls">
-              Pull requests:{' '}
-              {job.pulls.map((pull, i) => (
-                <Fragment key={pull.href}>
-                  {i > 0 && ' · '}
-                  <ExternalLink href={pull.href}>{pull.label}</ExternalLink>
-                </Fragment>
+            <div className="pulls">
+              <span className="pulls__label">Pull requests</span>
+              {job.pulls.map((pull) => (
+                <ExternalLink key={pull.href} className="link-arrow" href={pull.href}>
+                  {pull.label} <ArrowUpRight aria-hidden="true" />
+                </ExternalLink>
               ))}
-            </p>
+            </div>
           )}
           {job.storyMap && <StoryMap map={job.storyMap} />}
-        </div>
+        </TimelineItem>
       ))}
-    </section>
+    </Section>
   )
 }
