@@ -9,9 +9,6 @@ export const REDUCED_MOTION = '(prefers-reduced-motion: reduce)'
 export const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia(REDUCED_MOTION).matches
 
-/** Height of the sticky nav, so anchor jumps land below it. */
-export const NAV_OFFSET = 72
-
 /**
  * Smooth scrolling with Lenis, driven by GSAP's ticker so Lenis and
  * ScrollTrigger share one animation loop. Lag smoothing is off so a
@@ -22,7 +19,9 @@ export function startSmoothScroll(): () => void {
   if (prefersReducedMotion()) return () => {}
 
   const lenis = new Lenis({
-    anchors: { offset: -NAV_OFFSET },
+    /* anchor jumps respect each section's scroll-margin-top,
+       which already clears the sticky nav */
+    anchors: true,
     autoRaf: false,
   })
   lenis.on('scroll', ScrollTrigger.update)
