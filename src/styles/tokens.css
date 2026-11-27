@@ -1,52 +1,93 @@
-/* Design tokens. All component styles read from these variables,
-   so a new visual direction only needs changes here. */
+/* Design tokens, mirrored from the Figma file "Hussain Raza Portfolio"
+   (collections: Color, Type, Spacing, Radius). Component styles only
+   read these variables, so a visual change starts here. */
+
 :root {
-  /* Color */
-  --bg: #ffffff;
-  --text: #1a1a1a;
-  --muted: #5f6368;
-  --line: #e6e6e6;
-  --card: #fafafa;
-  --accent: #1f5fbf;
+  color-scheme: light dark;
+
+  /* Color: light (Figma Color / light/*) */
+  --bg: #f6f4ef;
+  --surface: #ffffff;
+  --surface-2: #eeebe4;
+  --text: #151514;
+  --text-muted: #5e5c57;
+  --line: #dedad1;
+  --accent: #c2410c;
   --on-accent: #ffffff;
-  --tag-bg: #eef3fb;
-  --tag-text: #1f4f99;
-  --eye-shadow: rgb(26 26 26 / 14%);
+  --accent-soft: #fbe7dc;
+  --tag-text: #9a3412;
+  --nav-bg: rgb(246 244 239 / 85%);
+  --shadow: 15 23 42;
 
-  /* Type */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --text-base: 16px;
-  --leading: 1.6;
-  --text-xs: 11px;
-  --text-sm: 13px;
-  --text-md: 14px;
-  --text-ui: 15px;
-  --text-lg: 18px;
-  --text-hero: 40px;
-  --text-hero-sm: 32px;
+  /* Type (Figma Type) */
+  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Geist Variable', 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --size-xs: 0.75rem;     /* 12 */
+  --size-sm: 0.875rem;    /* 14 */
+  --size-base: 1rem;      /* 16 */
+  --size-lg: 1.125rem;    /* 18 */
+  --size-xl: 1.375rem;    /* 22 */
+  --size-2xl: 2rem;       /* 32 */
+  --size-3xl: 3rem;       /* 48 */
+  --size-display-sm: 4rem; /* 64 */
+  --size-display: 8rem;   /* 128 */
+  --size-display-fluid: clamp(var(--size-display-sm), 1.2rem + 7.5vw, var(--size-display));
 
-  /* Layout */
-  --content-width: 760px;
-  --gutter: 20px;
-  --nav-height: 56px;
+  /* Spacing (Figma Spacing) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --gutter-desktop: 80px;
+  --gutter-mobile: 20px;
+  --gutter: clamp(var(--gutter-mobile), 5.5vw, var(--gutter-desktop));
+  --content-max: 1280px;
+  --nav-height: 72px;
 
-  /* Shape */
+  /* Radius (Figma Radius) */
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 14px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
   --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Point the bencho.dev blocks at the same palette. Doubled selector so
+   this wins over bencho-tokens.css, which loads later. */
+:root:root {
+  --bencho-font-ui: var(--font-body);
+  --bencho-ink: var(--text);
+  --bencho-on-ink: var(--bg);
+  --bencho-pane: var(--surface);
+  --bencho-pane-edge: var(--line);
+  --bencho-fill-on: var(--text);
+  --bencho-fill-slab: var(--surface);
+  --bencho-surface-2: var(--surface-2);
+  --bencho-focus: var(--accent);
+}
+
+/* Color: dark (Figma Color / dark/*) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #111315;
-    --text: #ececec;
-    --muted: #a0a4a8;
-    --line: #2a2d31;
-    --card: #171a1d;
-    --accent: #7aa7ff;
-    --on-accent: #0b0d10;
-    --tag-bg: #1d2633;
-    --tag-text: #a9c4ff;
+    --bg: #0e0e0d;
+    --surface: #171716;
+    --surface-2: #1f1f1d;
+    --text: #f2f0ea;
+    --text-muted: #a3a09a;
+    --line: #2c2b29;
+    --accent: #ff7a3d;
+    --on-accent: #140a04;
+    --accent-soft: #2a1a12;
+    --tag-text: #ffb48f;
+    --nav-bg: rgb(14 14 13 / 85%);
+    --shadow: 0 0 0;
   }
 }
