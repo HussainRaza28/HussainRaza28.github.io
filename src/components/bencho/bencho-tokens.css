@@ -1,0 +1,76 @@
+/* ── Bencho tokens ─────────────────────────────────────────
+   The colours the Bencho blocks read, at the values bencho.dev draws
+   them with, under a --bencho- prefix so they never collide with your
+   own theme. Light by default; dark under .dark or [data-theme="dark"]
+   on any ancestor. Point them at your own colours if you like: a block
+   only ever reads the names. https://bencho.dev */
+:root {
+  --bencho-font-ui: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --bencho-bg: #ffffff;
+  --bencho-board: #ffffff;
+  --bencho-card: #f7f7f6;
+  --bencho-surface: #f7f7f6;
+  --bencho-surface-2: #f1f1f0;
+  --bencho-surface-3: #ecebe7;
+  --bencho-ink: #17181a;
+  --bencho-ink-rgb: 23, 24, 26;
+  --bencho-ink-2: #3c3b37;
+  --bencho-ink-3: #5c5b56;
+  --bencho-ink-4: #6f6e68;
+  --bencho-ink-5: #85847e;
+  --bencho-on-ink: #ffffff;
+  --bencho-on-ink-rgb: 255, 255, 255;
+  --bencho-slab: #17181a;
+  --bencho-on-slab: #ffffff;
+  --bencho-slab-dark: #0e0f11;
+  --bencho-fill-slab: #ffffff;
+  --bencho-fill-on: #17181a;
+  --bencho-fill-on-rgb: 23, 24, 26;
+  --bencho-pane: var(--bencho-fill-slab);
+  --bencho-pane-edge: rgba(23, 24, 26, 0.08);
+  --bencho-pane-thumb: rgba(23, 24, 26, 0.07);
+  --bencho-inlay: rgba(255, 255, 255, 0.55);
+  --bencho-inlay-hi: rgba(23, 24, 26, 0.09);
+  --bencho-elev-rgb: 255, 255, 255;
+  --bencho-glass-rgb: 255, 255, 255;
+  --bencho-shadow-rgb: 23, 24, 26;
+  --bencho-wash: 0.06;
+  --bencho-pick: #0d99ff;
+  --bencho-signal: #2231dd;
+  --bencho-focus: #2231dd;
+  --bencho-ok: #15803d;
+  --bencho-ember: #b8431c;
+}
+
+.dark,
+[data-theme="dark"] {
+  --bencho-bg: #000000;
+  --bencho-board: #1a1a1a;
+  --bencho-card: #0a0a0a;
+  --bencho-surface: #0f0f0f;
+  --bencho-surface-2: #181818;
+  --bencho-surface-3: #202020;
+  --bencho-ink: #ffffff;
+  --bencho-ink-rgb: 255, 255, 255;
+  --bencho-ink-2: #b4b4b4;
+  --bencho-ink-3: #9a9a9a;
+  --bencho-ink-4: #828282;
+  --bencho-ink-5: #6b6b6b;
+  --bencho-on-ink: #000000;
+  --bencho-on-ink-rgb: 0, 0, 0;
+  --bencho-slab: #1a1a1a;
+  --bencho-on-slab: #ffffff;
+  --bencho-slab-dark: #262626;
+  --bencho-fill-slab: #262626;
+  --bencho-fill-on: #ffffff;
+  --bencho-fill-on-rgb: 255, 255, 255;
+  --bencho-pane-edge: rgba(255, 255, 255, 0.08);
+  --bencho-pane-thumb: rgba(255, 255, 255, 0.07);
+  --bencho-inlay: rgba(255, 255, 255, 0.1);
+  --bencho-inlay-hi: rgba(255, 255, 255, 0.09);
+  --bencho-elev-rgb: 32, 32, 32;
+  --bencho-shadow-rgb: 0, 0, 0;
+  --bencho-wash: 0.09;
+  --bencho-pick: #3aa9ff;
+  --bencho-ok: #34d17a;
+}
