@@ -1,0 +1,137 @@
+/* Case-study artwork. Always drawn on a night panel. */
+
+/* Skypane: a frosted weather window in a storm */
+.sky-art { position: absolute; inset: 0; display: grid; place-items: center; perspective: 1200px; }
+.sky-art__storm { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sky-art__window {
+  position: relative;
+  width: min(78%, 440px); aspect-ratio: 1.45;
+  border-radius: 26px;
+  background: linear-gradient(150deg, rgb(255 255 255 / 26%), rgb(196 182 255 / 10%) 55%, rgb(255 255 255 / 6%));
+  border: 1px solid rgb(255 255 255 / 38%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 55%),
+    inset 0 -18px 40px rgb(120 96 220 / 25%),
+    0 30px 60px -20px rgb(8 4 24 / 70%),
+    0 0 60px rgb(160 130 255 / 30%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  transform: rotateY(-16deg) rotateX(5deg) rotateZ(-1deg);
+  overflow: hidden;
+}
+.sky-art__chrome { display: flex; gap: 7px; padding: 14px 16px; border-bottom: 1px solid rgb(255 255 255 / 22%); }
+.sky-art__chrome i { width: 10px; height: 10px; border-radius: 50%; background: rgb(255 255 255 / 70%); }
+.sky-art__cloud { position: absolute; left: 12%; top: 14%; width: 76%; filter: drop-shadow(0 10px 18px rgb(40 20 110 / 45%)); }
+.sky-art__readout { position: absolute; left: 7%; right: 7%; bottom: 9%; display: flex; justify-content: space-between; align-items: flex-end; }
+.sky-art__lines { display: flex; flex-direction: column; gap: 7px; }
+.sky-art__lines i { height: 7px; border-radius: 4px; background: rgb(255 255 255 / 45%); }
+.sky-art__lines i:nth-child(1) { width: 110px; }
+.sky-art__lines i:nth-child(2) { width: 84px; }
+.sky-art__lines i:nth-child(3) { width: 58px; }
+.sky-art__temp { color: rgb(255 255 255 / 92%); font-family: var(--font-sans); font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 250; line-height: 1; letter-spacing: -0.03em; }
+.sky-art__floor {
+  position: absolute; left: 18%; right: 18%; bottom: 6%; height: 18%;
+  background: radial-gradient(closest-side, rgb(170 140 255 / 45%), transparent);
+  filter: blur(6px);
+}
+.sky-art__rain line, .sky-art__drops line { animation: sky-fall 1.4s linear infinite; }
+.sky-art__rain line:nth-child(2n), .sky-art__drops line:nth-child(2n) { animation-delay: -0.5s; }
+.sky-art__rain line:nth-child(3n), .sky-art__drops line:nth-child(3n) { animation-delay: -0.9s; }
+@keyframes sky-fall {
+  from { transform: translateY(-10px); opacity: 0; }
+  30% { opacity: 1; }
+  to { transform: translateY(26px); opacity: 0; }
+}
+.sky-art--compact .sky-art__window { width: 62%; border-radius: 16px; }
+.sky-art--compact .sky-art__chrome { padding: 8px 10px; gap: 5px; }
+.sky-art--compact .sky-art__chrome i { width: 6px; height: 6px; }
+.sky-art--compact .sky-art__lines i:nth-child(1) { width: 60px; }
+.sky-art--compact .sky-art__lines i:nth-child(2) { width: 44px; }
+.sky-art--compact .sky-art__lines i:nth-child(3) { width: 30px; }
+.sky-art--compact .sky-art__lines i { height: 4px; }
+.sky-art--compact .sky-art__temp { font-size: 1.6rem; }
+
+/* Tailor: annotated résumé pages */
+.tailor-art { position: absolute; inset: 0; display: grid; place-items: center; perspective: 1400px; }
+.tailor-art__sheet {
+  position: absolute;
+  width: min(54%, 300px); aspect-ratio: 8.5 / 11;
+  display: flex; flex-direction: column; gap: 9px;
+  padding: 8% 9%;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #fbfaf7, #efece6);
+  box-shadow: 0 30px 50px -18px rgb(6 8 30 / 70%), 0 2px 0 rgb(255 255 255 / 60%) inset;
+}
+.tailor-art__sheet--back { transform: translate(-22%, 4%) rotateZ(-8deg) rotateY(8deg); opacity: 0.82; }
+.tailor-art__sheet--front { transform: translate(8%, -2%) rotateZ(3deg) rotateY(-10deg); }
+.tailor-art__sheet i { display: block; height: 6px; border-radius: 3px; background: #c9c5d6; }
+.tailor-art__sheet i.h { height: 10px; background: #2b2d52; }
+.tailor-art__sheet i.name { height: 12px; margin-bottom: 2px; }
+.tailor-art__sheet i.sub { height: 5px; background: #d9d6e2; margin-bottom: 6px; }
+.tailor-art__sheet i.head { height: 7px; margin-top: 6px; background: #6b6d8e; }
+.w-25 { width: 25%; } .w-40 { width: 40%; } .w-45 { width: 45%; } .w-60 { width: 60%; } .w-70 { width: 70%; }
+.w-75 { width: 75%; } .w-80 { width: 80%; } .w-85 { width: 85%; } .w-90 { width: 90%; }
+.tailor-art__row { position: relative; display: flex; align-items: center; gap: 7px; padding: 4px 5px; margin-inline: -5px; border-radius: 4px; }
+.tailor-art__row b { flex: none; width: 4px; height: 4px; border-radius: 50%; background: #8e8aa8; }
+.tailor-art__row i { flex: 1; max-width: 100%; }
+.tailor-art__row.is-rewritten { background: rgb(124 92 255 / 22%); }
+.tailor-art__row.is-rewritten i { background: #7c5cff; }
+.tailor-art__row.is-kept i { background: #8fb9a3; }
+.tailor-art__row.is-blocked { outline: 1.5px dashed #e0607e; outline-offset: -1px; }
+.tailor-art__row.is-blocked i { background: #e7a3b3; }
+.tailor-art__notes { position: absolute; inset: 0; pointer-events: none; }
+.note, .tailor-art__chip {
+  position: absolute; padding: 6px 11px; border-radius: 999px;
+  font-family: var(--font-sans); font-size: 0.75rem; font-weight: 500; white-space: nowrap;
+  background: rgb(20 18 48 / 78%); border: 1px solid rgb(255 255 255 / 22%); color: #f4f1ff;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.note::before { content: ''; display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; vertical-align: 0; }
+.note--rewritten { right: 2%; top: 30%; }
+.note--rewritten::before { background: #9d84ff; }
+.note--kept { right: 0; top: 41%; }
+.note--kept::before { background: #8fd1ae; }
+.note--blocked { right: 4%; top: 52%; }
+.note--blocked::before { background: #ff7d98; }
+.tailor-art__chip { left: 6%; bottom: 10%; background: #f4f1ff; color: #1b1840; }
+.tailor-art--compact .tailor-art__sheet { width: 30%; gap: 5px; }
+.tailor-art--compact .tailor-art__sheet i { height: 4px; }
+.tailor-art--compact .tailor-art__sheet i.h { height: 6px; }
+.tailor-art--compact .tailor-art__row { padding: 2px 3px; margin-inline: -3px; gap: 4px; }
+
+/* CloudWatch: a health-event trace */
+.cw-art { position: absolute; inset: 0; display: grid; place-items: center; perspective: 1400px; }
+.cw-art__panel {
+  width: min(96%, 560px);
+  border-radius: 18px;
+  background: linear-gradient(160deg, rgb(255 255 255 / 12%), rgb(255 255 255 / 4%));
+  border: 1px solid rgb(255 255 255 / 24%);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 30px 60px -24px rgb(0 0 0 / 70%);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  transform: rotateY(-12deg) rotateX(4deg);
+  overflow: hidden;
+}
+.cw-art__bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid rgb(255 255 255 / 16%); font-family: var(--font-sans); font-size: 0.75rem; color: rgb(255 255 255 / 72%); }
+.cw-art__bar i { width: 9px; height: 9px; border-radius: 50%; background: rgb(255 255 255 / 45%); }
+.cw-art__bar span { margin-left: 8px; letter-spacing: 0.04em; text-transform: uppercase; }
+.cw-art svg { display: block; width: 100%; height: auto; }
+.cw-art__lane { fill: rgb(255 255 255 / 70%); font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; }
+.cw-art__track { stroke: rgb(255 255 255 / 10%); stroke-width: 1; }
+.cw-art__ok { fill: none; stroke: #6fe3c1; stroke-width: 2; stroke-linejoin: round; }
+.cw-art__bad { fill: none; stroke: #ff6f8e; stroke-width: 2; stroke-dasharray: 4 4; }
+.cw-art__pin { stroke-width: 1; stroke-dasharray: 3 4; }
+.cw-art__pin--event { stroke: #ff6f8e; }
+.cw-art__pin--restart { stroke: #9ec9ff; }
+.cw-art__dot--event { fill: #ff6f8e; filter: drop-shadow(0 0 6px #ff6f8e); }
+.cw-art__dot--restart { fill: #9ec9ff; filter: drop-shadow(0 0 6px #9ec9ff); }
+.cw-art__axis text { fill: rgb(255 255 255 / 45%); font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 11px; }
+.cw-art__events { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 16px; }
+.tag { padding: 5px 10px; border-radius: 999px; font-family: var(--font-sans); font-size: 0.75rem; font-weight: 500; color: #fff; }
+.tag--event { background: rgb(255 111 142 / 22%); border: 1px solid rgb(255 111 142 / 55%); }
+.tag--restart { background: rgb(158 201 255 / 18%); border: 1px solid rgb(158 201 255 / 50%); }
+.cw-art--compact .cw-art__panel { width: 82%; border-radius: 12px; }
+.cw-art--compact .cw-art__bar { padding: 8px 12px; font-size: 0.625rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sky-art__rain line, .sky-art__drops line { animation: none; }
+}
