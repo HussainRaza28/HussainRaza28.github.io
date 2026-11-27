@@ -1,39 +1,31 @@
-/* Design tokens, mirrored from the Figma file "Hussain Raza Portfolio"
-   (collections: Color, Type, Spacing, Radius). Component styles only
-   read these variables, so a visual change starts here. */
+/* Design tokens, mirrored in the Figma file "Hussain Raza Portfolio".
+   Component styles only read these variables. */
 
 :root {
   color-scheme: light dark;
 
-  /* Color: light (Figma Color / light/*) */
-  --bg: #f6f4ef;
-  --surface: #ffffff;
-  --surface-2: #eeebe4;
-  --text: #151514;
-  --text-muted: #5e5c57;
-  --line: #dedad1;
-  --accent: #c2410c;
-  --on-accent: #ffffff;
-  --accent-soft: #fbe7dc;
-  --tag-text: #9a3412;
-  --nav-bg: rgb(246 244 239 / 85%);
-  --shadow: 15 23 42;
+  /* Color: light */
+  --bg: #ffffff;
+  --bg-grouped: #f5f5f7;
+  --text: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --line: #d2d2d7;
+  --link: #0066cc;
+  --material: rgb(255 255 255 / 72%);
+  --shadow: 0 0 0;
 
-  /* Type (Figma Type) */
-  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'Geist Variable', 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --size-xs: 0.75rem;     /* 12 */
-  --size-sm: 0.875rem;    /* 14 */
-  --size-base: 1rem;      /* 16 */
-  --size-lg: 1.125rem;    /* 18 */
-  --size-xl: 1.375rem;    /* 22 */
-  --size-2xl: 2rem;       /* 32 */
-  --size-3xl: 3rem;       /* 48 */
-  --size-display-sm: 4rem; /* 64 */
-  --size-display: 8rem;   /* 128 */
-  --size-display-fluid: clamp(var(--size-display-sm), 1.2rem + 7.5vw, var(--size-display));
+  /* Type: the system face on Apple devices, Inter everywhere else */
+  --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter Variable', 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter Variable', 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --size-caption: 0.75rem;   /* 12 */
+  --size-footnote: 0.875rem; /* 14 */
+  --size-body: 1.0625rem;    /* 17 */
+  --size-headline: 1.3125rem; /* 21 */
+  --size-title: 2.5rem;      /* 40 */
+  --size-title-lg: 3.5rem;   /* 56 */
+  --leading-body: 1.47;
 
-  /* Spacing (Figma Spacing) */
+  /* Spacing */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -43,51 +35,43 @@
   --space-7: 48px;
   --space-8: 64px;
   --space-9: 96px;
-  --space-10: 128px;
-  --gutter-desktop: 80px;
-  --gutter-mobile: 20px;
-  --gutter: clamp(var(--gutter-mobile), 5.5vw, var(--gutter-desktop));
-  --content-max: 1280px;
-  --nav-height: 72px;
+  --gutter: 20px;
+  --column: 680px;
+  --art-max: 1200px;
 
-  /* Radius (Figma Radius) */
+  /* Radius */
   --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
   --radius-pill: 999px;
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Point the bencho.dev blocks at the same palette. Doubled selector so
-   this wins over bencho-tokens.css, which loads later. */
-:root:root {
-  --bencho-font-ui: var(--font-body);
-  --bencho-ink: var(--text);
-  --bencho-on-ink: var(--bg);
-  --bencho-pane: var(--surface);
-  --bencho-pane-edge: var(--line);
-  --bencho-fill-on: var(--text);
-  --bencho-fill-slab: var(--surface);
-  --bencho-surface-2: var(--surface-2);
-  --bencho-focus: var(--accent);
-}
-
-/* Color: dark (Figma Color / dark/*) */
+/* Color: dark */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0e0e0d;
-    --surface: #171716;
-    --surface-2: #1f1f1d;
-    --text: #f2f0ea;
-    --text-muted: #a3a09a;
-    --line: #2c2b29;
-    --accent: #ff7a3d;
-    --on-accent: #140a04;
-    --accent-soft: #2a1a12;
-    --tag-text: #ffb48f;
-    --nav-bg: rgb(14 14 13 / 85%);
+    --bg: #000000;
+    --bg-grouped: #1c1c1e;
+    --text: #f5f5f7;
+    --text-secondary: #a1a1a6;
+    --line: #38383a;
+    --link: #2997ff;
+    --material: rgb(28 28 30 / 72%);
     --shadow: 0 0 0;
   }
+}
+
+/* Point the bencho.dev dock at the same palette. Doubled selector so
+   this wins over bencho-tokens.css, which loads later. */
+:root:root {
+  --bencho-font-ui: var(--font);
+  --bencho-ink: var(--text);
+  --bencho-on-ink: var(--bg);
+  --bencho-pane: var(--material);
+  --bencho-pane-edge: var(--line);
+  --bencho-fill-on: var(--text);
+  --bencho-fill-slab: var(--bg);
+  --bencho-focus: var(--link);
 }
