@@ -101,7 +101,7 @@ img, svg { display: block; }
 .nav__menu-btn svg { width: 20px; height: 20px; }
 .nav__resume { background: var(--surface); border-color: var(--line); color: var(--text); }
 .nav__sheet { overflow: hidden; border-top: 1px solid var(--line); }
-.nav__sheet ul { list-style: none; margin: 0; padding: var(--space-3) 0 var(--space-5); }
+.nav__sheet ul { list-style: none; margin: 0 auto; padding-block: var(--space-3) var(--space-5); }
 .nav__sheet a {
   display: block; padding: var(--space-2) 0;
   font-family: var(--font-display); font-size: var(--size-2xl); font-weight: 600; letter-spacing: -0.02em;
