@@ -1,17 +1,16 @@
+import { Fragment } from 'react'
 import { skills } from '@/data/content'
 import Section from './Section'
 
-export default function Skills({ index }: { index: number }) {
+export default function Skills() {
   return (
-    <Section id="skills" index={index} title="Skills">
+    <Section id="skills" title="Skills">
       <dl className="skills">
         {skills.map(([group, list]) => (
-          <div className="skill-group" key={group} data-reveal>
+          <Fragment key={group}>
             <dt>{group}</dt>
-            <dd>
-              {list.split(', ').map((skill) => <span className="chip" key={skill}>{skill}</span>)}
-            </dd>
-          </div>
+            <dd>{list.join(', ')}</dd>
+          </Fragment>
         ))}
       </dl>
     </Section>

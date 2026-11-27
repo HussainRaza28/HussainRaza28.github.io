@@ -1,31 +1,29 @@
-import { ArrowUpRight } from 'lucide-react'
 import { projects } from '@/data/content'
-import { Tilt } from './bencho/tilt/Tilt'
-import ExternalLink from './ExternalLink'
+import ArrowLink from './ArrowLink'
 import Section from './Section'
 
-export default function Projects({ index }: { index: number }) {
+export default function Projects() {
   return (
-    <Section id="projects" index={index} title="Projects">
-      <ul className="projects" role="list" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+    <Section id="projects" title="Projects">
+      <ul className="entries">
         {projects.map((project) => (
-          <li key={project.name} data-reveal>
-            <Tilt className="project" tilt={4} corner={22} shade={16}>
-              <div className="project__head">
-                <h3 className="project__name">{project.name}</h3>
-                <span className="project__when">{project.when}</span>
+          <li key={project.name}>
+            <article>
+              <div className="entry__head">
+                <h3 className="entry__title">{project.name}</h3>
+                <span className="entry__when">{project.when}</span>
               </div>
-              <p className="project__desc">{project.description}</p>
-              <ul className="tags" aria-label="Built with">
-                {project.tags.map((tag) => <li className="tag" key={tag}>{tag}</li>)}
+              <p className="entry__meta">{project.role} · {project.context}</p>
+              <ul className="entry__points">
+                {project.points.map((point) => <li key={point}>{point}</li>)}
               </ul>
-              {project.repo && (
-                <ExternalLink className="link-arrow" href={project.repo}>
-                  View on GitHub <ArrowUpRight aria-hidden="true" />
-                  <span className="visually-hidden"> ({project.name})</span>
-                </ExternalLink>
-              )}
-            </Tilt>
+              <p className="entry__foot">
+                <span className="entry__stack">{project.stack.join(' · ')}</span>
+                {project.repo && (
+                  <ArrowLink href={project.repo} label={`${project.name} on GitHub`}>GitHub</ArrowLink>
+                )}
+              </p>
+            </article>
           </li>
         ))}
       </ul>

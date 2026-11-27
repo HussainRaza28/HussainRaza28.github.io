@@ -1,13 +1,20 @@
 import { education } from '@/data/content'
 import Section from './Section'
-import TimelineItem from './TimelineItem'
 
-export default function Education({ index }: { index: number }) {
+export default function Education() {
   return (
-    <Section id="education" index={index} title="Education">
-      <TimelineItem when={education.when} title={education.school} role={education.degree}>
-        <p className="tl-text">{education.coursework}</p>
-      </TimelineItem>
+    <Section id="education" title="Education">
+      <article>
+        <div className="entry__head">
+          <h3 className="entry__title">{education.school}</h3>
+          <span className="entry__when">{education.when}</span>
+        </div>
+        <p className="entry__meta">{education.degree} · GPA {education.gpa} · {education.location}</p>
+        <p className="entry__text">
+          <span className="secondary">Coursework: </span>
+          {education.coursework.join(', ')}
+        </p>
+      </article>
     </Section>
   )
 }

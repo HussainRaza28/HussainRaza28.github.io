@@ -1,31 +1,34 @@
-import { ArrowUpRight } from 'lucide-react'
 import { experience } from '@/data/content'
-import ExternalLink from './ExternalLink'
+import ArrowLink from './ArrowLink'
 import Section from './Section'
-import StoryMap from './StoryMap'
-import TimelineItem from './TimelineItem'
 
-export default function Experience({ index }: { index: number }) {
+export default function Experience() {
   return (
-    <Section id="experience" index={index} title="Experience">
-      {experience.map((job) => (
-        <TimelineItem key={job.company} when={job.when} title={job.company} role={job.role}>
-          <ul className="points">
-            {job.points.map((point) => <li key={point}>{point}</li>)}
-          </ul>
-          {job.pulls && (
-            <div className="pulls">
-              <span className="pulls__label">Pull requests</span>
-              {job.pulls.map((pull) => (
-                <ExternalLink key={pull.href} className="link-arrow" href={pull.href}>
-                  {pull.label} <ArrowUpRight aria-hidden="true" />
-                </ExternalLink>
-              ))}
-            </div>
-          )}
-          {job.storyMap && <StoryMap map={job.storyMap} />}
-        </TimelineItem>
-      ))}
+    <Section id="experience" title="Experience">
+      <ul className="entries">
+        {experience.map((job) => (
+          <li key={job.company}>
+            <article>
+              <div className="entry__head">
+                <h3 className="entry__title">{job.company}</h3>
+                <span className="entry__when">{job.when}</span>
+              </div>
+              <p className="entry__meta">{job.role} · {job.location}</p>
+              <ul className="entry__points">
+                {job.points.map((point) => <li key={point}>{point}</li>)}
+              </ul>
+              {job.pulls && (
+                <p className="entry__foot">
+                  <span className="secondary">Merged pull requests:</span>
+                  {job.pulls.map((pull) => (
+                    <ArrowLink key={pull.href} href={pull.href}>{pull.label}</ArrowLink>
+                  ))}
+                </p>
+              )}
+            </article>
+          </li>
+        ))}
+      </ul>
     </Section>
   )
 }
