@@ -1,5 +1,5 @@
 /* ══ Tilt ═══════════════════════════════════════════════════
-   A picture card that gives under the pointer. Almost nothing
+   A card that gives under the pointer. Almost nothing
    is here: the rotation, both gradients and the shadow are
    written per frame from the pointer's position, and a rule
    in this file that also had an opinion about any of them
@@ -7,6 +7,7 @@
    are true whatever the pointer is doing. */
 .tlt {
   position: relative;
+  height: 100%;
   /* The frame is what the pointer is measured against and it
      is deliberately the ONLY thing in here that never moves.
      The perspective lives on it rather than on the card for
@@ -15,14 +16,8 @@
      with the rotation instead of staying put in the room. */}
 
 .tlt-card {
-  position: absolute;
-  inset: 0;
-  background-color: var(--bencho-surface-2);
-  background-size: cover;
-  background-position: center;
-  /* `cover` and a fixed frame, so the crop is the one
-     scripts/butterfly.sh already made rather than a second
-     one on top of it */
+  position: relative;
+  height: 100%;
   overflow: hidden;
   /* NO `will-change`. It would hold a composited layer for
      every copy of this block on the wall, permanently, to

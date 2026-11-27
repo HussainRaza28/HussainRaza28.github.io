@@ -2,7 +2,7 @@
 
 import "./Tilt.css";
 import "../bencho-tokens.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 /* ── inlined from lab/spring ──────────────────────── */
 /* ── one spring, for everything that settles ───────────────
@@ -124,12 +124,10 @@ const stillness = () =>
   typeof window !== "undefined" &&
   !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
-/* A drawn placeholder: Bencho's photographs are licensed to
-   the site and do not travel. Point this at your own. */
-const BUTTERFLY: string = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20520%20640%22%20width%3D%22520%22%20height%3D%22640%22%20preserveAspectRatio%3D%22xMidYMid%20slice%22%3E%0A%3Cdefs%3E%3ClinearGradient%20id%3D%22s%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22rgb%28231%2C231%2C233%29%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22rgb%28185%2C185%2C187%29%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%0A%3Crect%20width%3D%22520%22%20height%3D%22640%22%20fill%3D%22url%28%23s%29%22%2F%3E%0A%3Ccircle%20cx%3D%22192%22%20cy%3D%22146%22%20r%3D%2247%22%20fill%3D%22rgb%28246%2C246%2C248%29%22%2F%3E%0A%3Cpath%20d%3D%22M0%2C640%20L0%2C390.5%20L65%2C402.2%20L130%2C375.9%20L195%2C343.8%20L260%2C345.3%20L325%2C378.5%20L390%2C402.8%20L455%2C388.3%20L520%2C352.9%20L520%2C640%20Z%22%20fill%3D%22rgb%28152%2C152%2C154%29%22%2F%3E%0A%3Cpath%20d%3D%22M0%2C640%20L0%2C461.1%20L65%2C440.4%20L130%2C436.3%20L195%2C452.2%20L260%2C475.1%20L325%2C486.4%20L390%2C476.8%20L455%2C454.2%20L520%2C437.0%20L520%2C640%20Z%22%20fill%3D%22rgb%28122%2C122%2C124%29%22%2F%3E%0A%3Cpath%20d%3D%22M0%2C640%20L0%2C532.5%20L65%2C539.0%20L130%2C562.1%20L195%2C568.2%20L260%2C548.3%20L325%2C531.5%20L390%2C542.2%20L455%2C564.9%20L520%2C566.5%20L520%2C640%20Z%22%20fill%3D%22rgb%2891%2C91%2C93%29%22%2F%3E%0A%3C%2Fsvg%3E";
-
 /* ══ Tilt ═════════════════════════════════════════════════
-   A picture card that gives under the pointer.
+   A card that gives under the pointer. Adapted from the bencho.dev
+   Tilt block (MIT): it wraps any content instead of a photo, sizes
+   to that content, and stays still under prefers-reduced-motion.
 
    IT SINKS, IT DOES NOT LIFT. Every tilt card on the internet
    rotates TOWARD the cursor: the corner you are nearest rises
@@ -165,12 +163,6 @@ const BUTTERFLY: string = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fw
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 const mix = (a: number, b: number, t: number) => a + (b - a) * t;
 
-/* Portrait, and the picture is cropped to it by
-   scripts/butterfly.sh rather than being fitted at runtime —
-   change one and change the other or the crop moves. */
-const W = 260;
-const H = 320;
-
 /* ── how deep the room is ──────────────────────────────────
    The one number that decides whether this reads as a card
    turning or as a poster being sheared. Perspective is the
@@ -178,7 +170,7 @@ const H = 320;
    is a face close to the glass: the near corner grows, the
    far corner shrinks, and ten degrees looks like thirty.
 
-   800 against a 320px card is about two and a half card
+   800 against a 320px card was about two and a half card
    heights back — far enough that the foreshortening is a
    suggestion rather than a fisheye, close enough that the
    corners are visibly different sizes. It is not a knob
@@ -198,57 +190,50 @@ const TILT = 10;
 const SHADE = 60;
 
 export function Tilt({
+  children,
+  className = "",
   /* the most either axis turns, in degrees */
   tilt = TILT,
   corner = CORNER,
   /* how dark the dent gets, 0..100 */
   shade = SHADE,
-}: { tilt?: number; corner?: number; shade?: number } = {}) {
+}: { children: ReactNode; className?: string; tilt?: number; corner?: number; shade?: number }) {
   const skin = useRef<HTMLDivElement | null>(null);
   const [at, setAt] = useState({ x: 0, y: 0 });
   const [on, setOn] = useState(false);
-  const still = stillness();
-
-  /* ── the state, and there is only this ───────────────────
-     Where the pointer is, as -1..1 on each axis, sprung. The
-     spring is on the POSITION rather than on the rotation, so
-     the gradients and the transform can never disagree about
-     where the finger is — they are three readings of one
-     number instead of three things being animated towards
-     the same place.
-
-     Sprung rather than tracked one-to-one because a card with
-     no weight follows the cursor exactly and reads as a
-     texture pinned to the mouse. The lag is what gives it
-     mass, and the settle on the way out is the only reason
-     leaving the card feels like anything at all. */
+  const [still] = useState(stillness);
+  /* Where the pointer is, as -1..1 on each axis, sprung. The rotation,
+     both gradients and the shadow are all read off these numbers, so
+     they can never disagree about where the pointer is. */
   const sx = useSpring(on ? at.x : 0, 50, still);
   const sy = useSpring(on ? at.y : 0, 50, still);
-  /* one more for how much of any of this applies, so the
-     shadow and the sheen fade rather than cutting */
+  /* how much of any of this applies, so the shadow and sheen fade */
   const lit = useSpring(on ? 1 : 0, 50, still);
+
+  if (still) {
+    return (
+      <div className="tlt">
+        <div className={`tlt-card ${className}`} style={{ borderRadius: clamp(corner, 0, 40) }}>
+          {children}
+        </div>
+      </div>
+    );
+  }
 
   const max = clamp(tilt, 0, 20);
   const rx = -sy * max;
   const ry = sx * max;
-
-  /* the pointer in the card's own terms, as a PERCENTAGE —
-     the wall and the overlay both draw this block at their
-     own scale, and a gradient placed in pixels would land
-     somewhere else in each of them */
   const px = ((sx + 1) / 2) * 100;
   const py = ((sy + 1) / 2) * 100;
-
   const dark = (clamp(shade, 0, 100) / 100) * 0.55 * lit;
   const rim = (clamp(shade, 0, 100) / 100) * 0.34 * lit;
 
   const track = (e: React.PointerEvent) => {
+    /* only a mouse or pen: a finger on a phone is scrolling */
+    if (e.pointerType === "touch") return;
     const el = skin.current;
     if (!el) return;
-    /* measured from the FRAME, which never moves. Reading the
-       card instead would be asking a rotating object where it
-       is, and near the edges it has already turned away from
-       the pointer that is asking. */
+    /* measured from the frame, which never moves */
     const r = el.getBoundingClientRect();
     setAt({
       x: clamp(((e.clientX - r.left) / r.width) * 2 - 1, -1, 1),
@@ -261,65 +246,27 @@ export function Tilt({
     <div
       className="tlt"
       ref={skin}
-      style={{ width: W, height: H, perspective: DEPTH }}
-      /* pointer, not mouse: the same handler carries a finger
-         dragged across the card, so a phone gets the effect
-         while it is being touched rather than getting nothing
-         at all. */
+      style={{ perspective: DEPTH }}
       onPointerMove={track}
-      /* ── `out` with a containment test, NOT `leave` ───────
-         Which is what leave IS — the browser derives it from
-         exactly this event by asking whether the thing you
-         moved to is inside the thing you were on — so this is
-         not a second mechanism, it is the same one written
-         out. What it buys is the case React would not
-         synthesise: the rehearsal drives a scripted pointer by
-         dispatching `pointerout`, and its final beat walks off
-         the card carrying `relatedTarget: null`. Measured, no
-         `onPointerLeave` came of it, and every card on the
-         wall finished its demo still sunk under a cursor that
-         had gone.
-
-         Null counts as outside, which is also the honest
-         answer for a real pointer leaving the window. */
       onPointerOut={(e) => {
         const el = skin.current;
         const to = e.relatedTarget as Node | null;
         if (!el || !to || !el.contains(to)) setOn(false);
       }}
-      /* a touch taken over by a scroll never reports leaving */
       onPointerCancel={() => setOn(false)}
     >
       <div
-        className="tlt-card"
+        className={`tlt-card ${className}`}
         style={{
           borderRadius: clamp(corner, 0, 40),
-          backgroundImage: `url(${BUTTERFLY})`,
-          /* translateZ FIRST, so the retreat is measured in
-             the room's axes rather than in the card's own —
-             after a rotation, the card's z points somewhere
-             off to the side and "back" stops meaning back. */
+          /* translateZ first, so the retreat is in the room's axes */
           transform: `translateZ(${-SINK * lit}px) rotateX(${rx}deg) rotateY(${ry}deg)`,
-          /* ── the shadow TIGHTENS ────────────────────────
-             A thing pressed into a surface has less air under
-             it, so the gap closes and the shadow draws in.
-             Growing it on hover is the reflex — it is what a
-             card that LIFTS would do — and it fights every
-             other cue here. */
-          boxShadow: `0 ${mix(20, 9, lit)}px ${mix(44, 24, lit)}px -8px rgba(15, 23, 42, ${mix(
-            0.22,
-            0.15,
-            lit,
-          )})`,
+          /* the shadow only appears while the card is pressed, and
+             tightens as it sinks */
+          boxShadow: `0 ${mix(14, 8, lit)}px ${mix(36, 22, lit)}px -10px rgba(var(--shadow), ${0.2 * lit})`,
         }}
       >
-        {/* ── the dent, and the rim opposite it ───────────
-            The shadow pools where the surface is deepest,
-            which is under the pointer, and the light catches
-            the far edge that has risen — so the two are
-            placed at mirrored points and neither is centred
-            on anything. This is the layer that makes the
-            transform read as a press. */}
+        {children}
         <span
           className="tlt-sheen"
           aria-hidden="true"
