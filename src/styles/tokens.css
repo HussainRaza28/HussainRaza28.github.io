@@ -1,31 +1,40 @@
-/* Design tokens, mirrored in the Figma file "Hussain Raza Portfolio".
-   Component styles only read these variables. */
+/* Design tokens. The hero and case-study panels are always the
+   blue-hour night; the reading sections below follow the visitor's
+   light or dark setting. */
 
 :root {
   color-scheme: light dark;
 
-  /* Color: light */
-  --bg: #ffffff;
-  --bg-grouped: #f5f5f7;
-  --text: #1d1d1f;
-  --text-secondary: #6e6e73;
-  --line: #d2d2d7;
-  --link: #0066cc;
-  --material: rgb(255 255 255 / 72%);
-  --shadow: 0 0 0;
+  /* Page: light */
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --text: #16183a;
+  --text-secondary: #575a78;
+  --line: #e0ddd5;
+  --accent: #5a3fd0;
+  --accent-soft: #ece8ff;
+  --shadow: 22 24 58;
 
-  /* Type: the system face on Apple devices, Inter everywhere else */
-  --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter Variable', 'Inter', 'Segoe UI', Roboto, sans-serif;
-  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter Variable', 'Inter', 'Segoe UI', Roboto, sans-serif;
-  --size-caption: 0.75rem;   /* 12 */
-  --size-footnote: 0.875rem; /* 14 */
-  --size-body: 1.0625rem;    /* 17 */
-  --size-headline: 1.3125rem; /* 21 */
-  --size-title: 2.5rem;      /* 40 */
-  --size-title-lg: 3.5rem;   /* 56 */
-  --leading-body: 1.47;
+  /* Night panels (hero, case-study headers) in both themes */
+  --night: #11164a;
+  --night-text: #f7f4ee;
+  --night-text-secondary: rgb(247 244 238 / 78%);
+  --night-line: rgb(255 255 255 / 30%);
+  --glow: 196 178 255;
 
-  /* Spacing */
+  /* Type */
+  --font-serif: 'Fraunces Variable', 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter Variable', 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --size-caption: 0.8125rem;  /* 13 */
+  --size-small: 0.9375rem;    /* 15 */
+  --size-body: 1.0625rem;     /* 17 */
+  --size-lead: 1.25rem;       /* 20 */
+  --size-h3: 1.375rem;        /* 22 */
+  --size-h2: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  --size-hero: clamp(4rem, 1.6rem + 8.6vw, 8.75rem);
+  --size-case: clamp(3.25rem, 1.6rem + 6vw, 7rem);
+
+  /* Space */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -33,45 +42,27 @@
   --space-5: 24px;
   --space-6: 32px;
   --space-7: 48px;
-  --space-8: 64px;
-  --space-9: 96px;
-  --gutter: 20px;
-  --column: 680px;
-  --art-max: 1200px;
+  --space-8: 72px;
+  --space-9: 112px;
+  --gutter: clamp(20px, 5vw, 80px);
+  --max: 1240px;
 
-  /* Radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-pill: 999px;
-
-  /* Motion */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Shape and motion */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Color: dark */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #000000;
-    --bg-grouped: #1c1c1e;
-    --text: #f5f5f7;
-    --text-secondary: #a1a1a6;
-    --line: #38383a;
-    --link: #2997ff;
-    --material: rgb(28 28 30 / 72%);
+    --bg: #0b0e29;
+    --surface: #141838;
+    --text: #f1eee8;
+    --text-secondary: #a9abc8;
+    --line: #262b55;
+    --accent: #b9a6ff;
+    --accent-soft: #221d4d;
     --shadow: 0 0 0;
   }
-}
-
-/* Point the bencho.dev dock at the same palette. Doubled selector so
-   this wins over bencho-tokens.css, which loads later. */
-:root:root {
-  --bencho-font-ui: var(--font);
-  --bencho-ink: var(--text);
-  --bencho-on-ink: var(--bg);
-  --bencho-pane: var(--material);
-  --bencho-pane-edge: var(--line);
-  --bencho-fill-on: var(--text);
-  --bencho-fill-slab: var(--bg);
-  --bencho-focus: var(--link);
 }
