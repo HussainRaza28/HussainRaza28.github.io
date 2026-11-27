@@ -5,7 +5,7 @@ export type Link = { href: string; label: string }
 
 export const profile = {
   name: 'Hussain Raza',
-  tagline: 'Computer Science at the University of Virginia · Former AWS SDE Intern',
+  tagline: 'Computer science at UVA · Former AWS SDE intern',
   about:
     "I'm a third-year CS student at UVA, graduating in May 2028. In summer 2025 I interned on the CloudWatch Agent team at AWS, where I worked on health monitoring for Kubernetes and got three pull requests merged into public AWS repositories. I like building software that people actually use, and a lot of my work lately involves AI coding tools like Claude Code and Kiro.",
   resume: '/Hussain_Raza_Resume_GitHub.pdf',
@@ -16,13 +16,10 @@ export const profile = {
   site: 'https://hussainraza.dev',
 }
 
+/** Top navigation, shown on every page. */
 export const navLinks = [
-  { href: '#education', label: 'Education' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#honors', label: 'Honors' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/#projects', label: 'Projects' },
 ]
 
 export const education = {
@@ -49,6 +46,8 @@ export type Job = {
   when: string
   points: string[]
   pulls?: Link[]
+  /** Slug of the case study page, if there is one. */
+  caseStudy?: string
 }
 
 export const experience: Job[] = [
@@ -63,6 +62,7 @@ export const experience: Job[] = [
       'Extended health monitoring to the NVIDIA GPU and AWS Trainium monitors and added a health check endpoint to the CloudWatch agent, a long-requested feature',
       'Reproduced the failures on EKS clusters, wrote the design doc, briefed the EKS Add-On team, and reworked the design after review caught a risk to another CloudWatch feature',
     ],
+    caseStudy: 'cloudwatch',
     pulls: [
       { href: 'https://github.com/aws/amazon-cloudwatch-agent-operator/pull/327', label: 'Liveness & readiness probes' },
       { href: 'https://github.com/aws/amazon-cloudwatch-agent-operator/pull/332', label: 'Status conditions & health events' },
@@ -80,11 +80,14 @@ export type Project = {
   stack: string[]
   points: string[]
   repo?: string
+  /** Slug of the case study page, if there is one. */
+  caseStudy?: string
 }
 
 export const projects: Project[] = [
   {
     name: 'Tailor',
+    caseStudy: 'tailor',
     when: 'Fall 2026',
     role: 'Creator',
     context: 'Personal project',
@@ -98,6 +101,7 @@ export const projects: Project[] = [
   },
   {
     name: 'Skypane',
+    caseStudy: 'skypane',
     when: 'Fall 2026',
     role: 'Creator',
     context: 'Personal project',
@@ -197,3 +201,112 @@ export const skills: [string, string[]][] = [
 export const contact = {
   lead: 'Feel free to reach out.',
 }
+
+/* Case studies: the detail pages at /work/<slug>. Written from the resume
+   facts above; nothing here should claim more than those do. */
+
+export type CaseStudy = {
+  slug: 'cloudwatch' | 'tailor' | 'skypane'
+  /** Label on the homepage orbit and in lists. */
+  label: string
+  title: string
+  /** One sentence on what was built. */
+  summary: string
+  kind: string
+  when: string
+  stack: string[]
+  highlightsLabel: string
+  highlights: string[]
+  problem: string
+  contribution: string[]
+  outcome: string[]
+  links: Link[]
+}
+
+// TODO: review the problem statements below; they are paraphrased from the resume bullets
+export const caseStudies: CaseStudy[] = [
+  {
+    slug: 'cloudwatch',
+    label: 'AWS CloudWatch',
+    title: 'AWS CloudWatch',
+    summary:
+      'Health events and probes that let Kubernetes catch and recover broken monitoring components in the Amazon CloudWatch Observability EKS add-on.',
+    kind: 'Internship · Amazon Web Services',
+    when: 'May 2025 – August 2025',
+    stack: ['Go', 'Kubernetes', 'Amazon EKS', 'CloudWatch'],
+    highlightsLabel: 'Inside the work',
+    highlights: ['Kubernetes health events', 'Liveness & readiness probes', 'Health check endpoint'],
+    problem:
+      'When an agent or GPU monitor broke, the EKS console still showed the install as successful, so the failure stayed silent. A component that hung had to be recovered by hand.',
+    contribution: [
+      'Reproduced the failures on EKS clusters and wrote the design doc',
+      'Emitted Kubernetes health events in Go so broken components show up right away',
+      'Added liveness and readiness probes to every monitoring component in the add-on',
+      'Extended health monitoring to the NVIDIA GPU and AWS Trainium monitors and added a health check endpoint to the CloudWatch agent, a long-requested feature',
+      'Briefed the EKS Add-On team and reworked the design after review caught a risk to another CloudWatch feature',
+    ],
+    outcome: [
+      'Time to detect a broken agent or GPU monitor went from never to under a minute',
+      'Recovery of a hung component went from manual to automatic, in about 50 seconds',
+      '3 pull requests, about 700 lines of Go with unit tests, merged into 2 public AWS repositories',
+    ],
+    links: [
+      { href: 'https://github.com/aws/amazon-cloudwatch-agent-operator/pull/327', label: 'Liveness & readiness probes' },
+      { href: 'https://github.com/aws/amazon-cloudwatch-agent-operator/pull/332', label: 'Status conditions & health events' },
+      { href: 'https://github.com/aws/amazon-cloudwatch-agent/pull/1779', label: 'Health check extension' },
+    ],
+  },
+  {
+    slug: 'tailor',
+    label: 'Tailor',
+    title: 'Tailor',
+    summary: 'A desktop app and Chrome extension that tailor a LaTeX resume to a job posting without inventing experience.',
+    kind: 'Personal project',
+    when: 'Fall 2026',
+    stack: ['Python', 'React', 'TypeScript', 'Chrome Extension'],
+    highlightsLabel: 'Inside the app',
+    highlights: ['Bullet-level rewrites', 'Fact check against the original', 'Application autofill'],
+    problem:
+      'Tailoring a resume for every posting takes time, and rewriting it with AI risks adding numbers, names, or skills that were never in the original.',
+    contribution: [
+      'Built a desktop app for Mac and Windows that scores a LaTeX resume against a job posting',
+      'Rewrites only the bullets that need it, using 5 swappable AI providers, and exports a one-page PDF',
+      'Wrote a Python check that blocks any rewrite containing a number, name, or skill not found in the original resume',
+      'Built a Chrome extension that autofills job applications on major hiring sites',
+    ],
+    outcome: [
+      "Models like Claude and Gemini can't invent experience: unsupported rewrites are blocked",
+      'A typical application went from 10–15 minutes to 3–4 minutes',
+    ],
+    links: [],
+  },
+  {
+    slug: 'skypane',
+    label: 'Skypane',
+    title: 'Skypane',
+    summary: 'A native macOS weather app with window-aware particle animations.',
+    kind: 'Personal project',
+    when: 'Fall 2026',
+    stack: ['Swift', 'SwiftUI', 'SpriteKit', 'Apple Foundation Models'],
+    highlightsLabel: 'Inside the app',
+    highlights: ['Live conditions', 'Window-aware particles', 'Scenes from prompts'],
+    problem:
+      'A weather app that animates rain and storms around your windows has to stay light enough to leave running on a Mac all day.',
+    contribution: [
+      'Built live conditions with particle animations that react to the windows on screen',
+      'Used Apple Foundation Models to create custom scenes from natural-language prompts',
+      'Added validation that keeps generated effects within what the prompt asked for',
+      'Optimized rendering and made it suspend when the app is inactive',
+    ],
+    outcome: [
+      'Thunderstorm CPU use dropped from 35% to 18%',
+      'Idle memory use dropped by 45%',
+    ],
+    links: [{ href: 'https://github.com/HussainRaza28/Skypane', label: 'Skypane on GitHub' }],
+  },
+]
+
+/* The three labeled links on the homepage orbits, in reading order. */
+export const featured: CaseStudy['slug'][] = ['cloudwatch', 'tailor', 'skypane']
+
+export const caseStudyBySlug = (slug: string) => caseStudies.find((study) => study.slug === slug)
