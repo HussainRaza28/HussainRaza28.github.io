@@ -1,17 +1,25 @@
-import { profile } from '../data/content'
-import ExternalLink from './ExternalLink'
+import { FileText, Mail, Phone } from 'lucide-react'
+import { contact, profile } from '@/data/content'
+import { GlassDock, type DockItem } from './bencho/dock/GlassDock'
+import { GithubIcon, LinkedinIcon } from './BrandIcons'
+import Section from './Section'
 
-export default function Contact() {
+const dockItems: DockItem[] = [
+  { key: 'email', label: 'Email', href: `mailto:${profile.email}`, Icon: Mail },
+  { key: 'phone', label: profile.phone.label, href: profile.phone.href, Icon: Phone },
+  { key: 'linkedin', label: 'LinkedIn', href: profile.linkedin, Icon: LinkedinIcon, external: true },
+  { key: 'github', label: 'GitHub', href: profile.github, Icon: GithubIcon, external: true },
+  { key: 'resume', label: 'Resume', href: profile.resume, Icon: FileText, external: true },
+]
+
+export default function Contact({ index }: { index: number }) {
   return (
-    <section id="contact" className="contact">
-      <h2>Contact</h2>
-      <p>Feel free to reach out.</p>
-      <div className="links">
-        <a className="btn primary" href={`mailto:${profile.email}`}>{profile.email}</a>
-        <a className="btn" href={profile.phone.href}>{profile.phone.label}</a>
-        <ExternalLink className="btn" href={profile.linkedin}>LinkedIn</ExternalLink>
-        <ExternalLink className="btn" href={profile.github}>GitHub</ExternalLink>
+    <Section id="contact" index={index} title="Contact">
+      <p className="contact__lead" data-reveal>{contact.lead}</p>
+      <a className="contact__email" href={`mailto:${profile.email}`} data-reveal>{profile.email}</a>
+      <div data-reveal>
+        <GlassDock items={dockItems} label="Contact links" />
       </div>
-    </section>
+    </Section>
   )
 }

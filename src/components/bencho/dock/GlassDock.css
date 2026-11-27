@@ -265,3 +265,8 @@
   background: none;
   -webkit-mask: none;
   mask: none;}
+/* Site overrides: links rather than buttons, a hairline edge, and
+   resting icons dark enough to read. */
+.gdock { border: 1px solid var(--bencho-pane-edge); }
+.gdock-item { opacity: 0.72; color: var(--bencho-ink); text-decoration: none; }
+.gdock-item:hover, .gdock-item:focus-visible { opacity: 1; }
