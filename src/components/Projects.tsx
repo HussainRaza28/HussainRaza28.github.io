@@ -10,7 +10,7 @@ export default function Projects({ index }: { index: number }) {
       <ul className="projects" role="list" style={{ listStyle: 'none', margin: 0, padding: 0 }}>
         {projects.map((project) => (
           <li key={project.name} data-reveal>
-            <Tilt className="project" tilt={5} corner={22} shade={35}>
+            <Tilt className="project" tilt={4} corner={22} shade={16}>
               <div className="project__head">
                 <h3 className="project__name">{project.name}</h3>
                 <span className="project__when">{project.when}</span>
