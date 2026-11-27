@@ -14,7 +14,7 @@ const clamp = (value: number, min: number, max: number) => Math.min(max, Math.ma
    The eyes are points on the ball's surface, not stickers on top:
    the far eye narrows as the ball turns away from the pointer. */
 export default function EyeTracker() {
-  const rootRef = useRef<HTMLDivElement>(null)
+  const rootRef = useRef<HTMLSpanElement>(null)
   const eyeRefs = useRef<(SVGGElement | null)[]>([])
   const rectRefs = useRef<(SVGRectElement | null)[]>([])
 
@@ -153,7 +153,7 @@ export default function EyeTracker() {
   }, [])
 
   return (
-    <div className="hero-eye-tracker" aria-hidden="true" ref={rootRef}>
+    <span className="hero-eye-tracker" aria-hidden="true" ref={rootRef}>
       <svg className="hero-eye-ball" viewBox="0 0 100 100">
         <path
           className="hero-eye-body"
@@ -175,6 +175,6 @@ export default function EyeTracker() {
           ))}
         </g>
       </svg>
-    </div>
+    </span>
   )
 }
