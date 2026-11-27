@@ -27,6 +27,7 @@ function staticRoutes(): Plugin {
 }
 
 export default defineConfig({
+  base: '/',
   plugins: [react(), staticRoutes()],
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
