@@ -1,35 +1,23 @@
-import { useEffect } from 'react'
-import { startSmoothScroll } from '@/lib/motion'
-import Art from './components/Art'
-import Contact from './components/Contact'
-import Dock from './components/Dock'
-import Education from './components/Education'
-import Experience from './components/Experience'
-import Footer from './components/Footer'
-import Hero from './components/Hero'
-import Honors from './components/Honors'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
+import { caseStudyBySlug } from '@/data/content'
+import { RouterProvider } from '@/lib/router'
+import { useRouter } from '@/lib/router-context'
+import CaseStudyPage from '@/pages/CaseStudyPage'
+import HomePage from '@/pages/HomePage'
+import NotFoundPage from '@/pages/NotFoundPage'
+
+function Routes() {
+  const { location } = useRouter()
+  if (location.path === '/') return <HomePage />
+  const match = location.path.match(/^\/work\/([^/]+)$/)
+  if (match && caseStudyBySlug(match[1])) return <CaseStudyPage key={match[1]} slug={match[1]} />
+  return <NotFoundPage />
+}
 
 export default function App() {
-  useEffect(() => startSmoothScroll(), [])
-
   return (
-    <>
+    <RouterProvider>
       <a className="skip-link" href="#main">Skip to content</a>
-      <div id="top" />
-      <Art />
-      <main id="main" tabIndex={-1}>
-        <Hero />
-        <Education />
-        <Experience />
-        <Projects />
-        <Honors />
-        <Skills />
-        <Contact />
-      </main>
-      <Footer />
-      <Dock />
-    </>
+      <Routes />
+    </RouterProvider>
   )
 }
